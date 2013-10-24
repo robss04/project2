@@ -17,7 +17,13 @@ class User
 
   before_save :encrypt_password
 
+  def authenticate(password)
+    self.fish == BCrypt::Engine.hash_secret(password, self.salt)
+  end
+
+
   private
+
 
   def encrypt_password
   	if password.present?

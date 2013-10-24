@@ -1,11 +1,32 @@
 doctype html
-html
+html lang="en"
   head
-	title Project2
-	= csrf_meta_tags 
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
 
-	= stylesheet_link_tag "application", media: "all"
+    title ToddyCat
+    = csrf_meta_tags 
+
+    = stylesheet_link_tag "application", media: "all"
+  
   body
- 	== yield
+    #wrap
+      - if current_user
+        == render partial: 'layouts/navigation'
+      - else 
+        == render partial: "layouts/header"
 
-	= javascript_include_tag "application"
+  
+      .container
+        .page
+           == yield
+
+  #footer
+    .container
+      p.text-muted.credit
+        => link_to "Privacy Policy", privacy_url
+        ' &bull;
+        => link_to "Terms of Use", terms_url
+        ' &bull; &copy; 2013 ToddyCat
+
+  = javascript_include_tag "application"
