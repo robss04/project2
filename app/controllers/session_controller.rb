@@ -13,7 +13,7 @@ class SessionController < ApplicationController
   					@user.expires_at = Time.now + 1.day
   					@user.save 
 
-  					UserMailer.reset_mailer(@user, request).deliver
+  					UserMailer.reset_email(@user, request).deliver
 
             flash.now.notice = "An email with instructions for " + 
   						"resetting your password has been sent to you."
